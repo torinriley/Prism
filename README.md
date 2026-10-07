@@ -3,6 +3,8 @@
 > GPU-accelerated image processing for Swift  
 > **Torin Etheridge · October 6, 2026**
 
+[![CI status on main](https://github.com/torinriley/Prism/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/torinriley/Prism/actions/workflows/ci.yml?query=branch%3Amain)
+
 [Architecture](Documentation/ARCHITECTURE.md) · [Render graph](Documentation/RENDER_GRAPH.md) · [Metal backend](Documentation/METAL_BACKEND.md) · [Color](Documentation/COLOR.md) · [Benchmarks](Documentation/BENCHMARKING.md) · [Optimization log](Documentation/OPTIMIZATION.md) · [Project status](Documentation/STATUS.md)
 
 Prism is a Swift and Metal image-processing engine for Apple platforms. A compact value-oriented API hides an explicit render graph, deterministic scheduling, graph optimization, resource lifetime analysis, pooled textures, pipeline and LUT caches, asynchronous GPU execution, and instrumentation. Core Image is not used to implement effects.

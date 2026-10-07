@@ -171,3 +171,7 @@ Standard processing is premultiplied, sRGB-encoded `rgba8Unorm`. High precision 
 - Performance data currently covers one Apple GPU generation.
 
 Prism has no third-party runtime dependencies.
+
+## License
+
+Prism is released under the [Apache License 2.0](LICENSE). Copyright 2026 Torin Etheridge; see [NOTICE](NOTICE).

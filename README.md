@@ -29,6 +29,7 @@ let output = try await pipeline.render(inputCGImage)
 - macOS 14+, iOS 17+. The `Prism` library compiles for iOS devices and the iOS Simulator; the tests, benchmarks and all measurements have been run on macOS only (Apple M5). Prism Studio is macOS-only.
 - A Metal-capable device
 - Apple's Metal Toolchain component (`xcodebuild -downloadComponent MetalToolchain`) if the local Xcode installation does not include the `metal` compiler
+- Shaders are compiled at build time where the build system supports Metal (Xcode, Swift 6.4's SwiftPM). With an older SwiftPM build system the `.metal` files are only copied, and Prism compiles them from source when the first `Renderer` is created (`swift build`, `swift test` and `swift run` all work either way)
 
 Add this repository as a Swift Package dependency and link the `Prism` product:
 

@@ -30,12 +30,24 @@ public final class Renderer: Sendable {
     ///   - texturePoolBudget: Most idle texture memory, in bytes, kept for reuse between
     ///     renders. Default 512 MiB.
     /// - Throws: `PrismError.metalUnavailable` or `.shaderLibraryUnavailable`.
-    public init(
+    public convenience init(
         instrumentation: InstrumentationLevel = .standard,
         optimizations: OptimizationOptions = .all,
         texturePoolBudget: Int = 512 * 1024 * 1024
     ) throws {
-        context = try MetalContext()
+        try self.init(
+            context: MetalContext(), instrumentation: instrumentation, optimizations: optimizations,
+            texturePoolBudget: texturePoolBudget)
+    }
+
+    /// For tests: a renderer on a specific context (for example one that compiles shaders from source).
+    init(
+        context: MetalContext,
+        instrumentation: InstrumentationLevel = .standard,
+        optimizations: OptimizationOptions = .all,
+        texturePoolBudget: Int = 512 * 1024 * 1024
+    ) {
+        self.context = context
         self.optimizations = optimizations
         self.instrumentation = instrumentation
         signposter = Signposts.signposter(for: instrumentation)

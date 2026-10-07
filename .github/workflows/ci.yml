@@ -2,11 +2,18 @@
 #
 # The GPU tests are written with `.enabled(if: hasMetal)`, so on a machine without a Metal device they
 # are *skipped* and `swift test` still exits 0. The "Require a Metal device" step makes that a failure
-# instead. If GitHub-hosted runners turn out to have no Metal device, point `test` at a self-hosted Mac
-# (`runs-on: [self-hosted, macOS, gpu]`) and do not let it run pull requests from forks.
+# instead. GitHub-hosted macOS runners do have one (an "Apple Paravirtual device" on a virtual M1; first
+# CI run, October 2026), so the hosted runner is used. Its GPU is virtualized: results from it say nothing
+# about performance, and device-specific behaviour (timestamp counters, threadgroup limits) may differ
+# from real hardware.
 #
-# Toolchain: the package has only been built with Xcode 27 / Swift 6.4. Pin the Xcode you want tested
-# (for example with maxim-lobanov/setup-xcode) rather than relying on whatever `macos-latest` carries.
+# Shaders: SwiftPM on the hosted runners' toolchain only *copies* `.metal` files, it does not compile
+# them (the first run failed with "no default library was found"). Prism falls back to compiling the
+# bundled sources at runtime, so `swift test` below exercises that path, and the `test-xcode` job
+# exercises the precompiled path through Xcode's build system.
+#
+# Toolchain: the package has only been built locally with Xcode 27 / Swift 6.4. Pin the Xcode you want
+# tested (for example with maxim-lobanov/setup-xcode) rather than relying on whatever `macos-latest` carries.
 
 name: CI
 
@@ -61,6 +68,16 @@ jobs:
           else
             swift test --sanitize=${{ matrix.sanitizer }}
           fi
+
+  test-xcode:
+    name: Tests (Xcode build system, precompiled shaders)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Metal toolchain
+        run: xcodebuild -downloadComponent MetalToolchain || true
+      - name: Test
+        run: xcodebuild test -scheme Prism-Package -destination 'platform=macOS'
 
   release-build:
     name: Release build

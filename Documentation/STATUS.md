@@ -63,6 +63,10 @@ See `Benchmarks/results/after-5-precision.md` for the precision cost. At 4K, the
   8.57 ms for the 5-stage pipeline); reproducible, cause not understood. See [OPTIMIZATION.md](OPTIMIZATION.md).
 - The README screenshot is a cold first frame (pipelines compiling, no texture reuse); it should be retaken
   after moving a slider. Prism Studio runs at `.detailed` instrumentation, which its inspector now states.
+- **Shader packaging.** A toolchain whose SwiftPM only copies `.metal` files (the GitHub-hosted runner's) has no
+  precompiled library; Prism then compiles the bundled sources at runtime. The two paths give byte-identical
+  output (tested), but the runtime path adds startup time (0.7 ms vs 0.28 ms warm; cold not measured) and has been
+  exercised in CI only through the first failing run's diagnosis plus a local `--build-system native` run.
 - **iOS:** the `Prism` library compiles for iOS devices and the iOS Simulator (verified with
   `xcodebuild -scheme Prism -destination 'generic/platform=iOS'` and `…'iOS Simulator'`). It has never been
   *run* on iOS: tests, benchmarks and measurements are macOS-only. Building the whole package for iOS

@@ -4,8 +4,15 @@
 
 ## Runtime objects
 
-`MetalContext` creates one `MTLDevice`, command queue and module shader library. SwiftPM compiles the
-`.metal` resources into the package bundle's `default.metallib`. Pipeline-state creation is centralized
+`MetalContext` creates one `MTLDevice`, command queue and shader library. With Xcode's build system (and
+Swift 6.4's SwiftPM) the `.metal` resources are compiled into the package bundle's `default.metallib`.
+An older SwiftPM build system only *copies* them, so there is no compiled library; in that case `MetalContext`
+compiles the bundled `.metal` sources at runtime, one library per file, with `#include "…"` of the bundled
+headers expanded in place (found by the first GitHub Actions run, which failed with "no default library was
+found"). The two paths were tested to give byte-identical output across every kernel, and `swift test
+--build-system native` reproduces the old-toolchain situation locally. Runtime compilation adds startup time:
+0.7 ms against 0.28 ms for `MetalContext` initialization on a machine with a warm shader cache; a cold
+first compile has not been measured. Pipeline-state creation is centralized
 and cached by kernel name; operations never create raw Metal infrastructure.
 
 One render uses one command buffer. Standard instrumentation uses a serial compute encoder so

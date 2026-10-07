@@ -1,0 +1,1013 @@
+{
+  "environment" : {
+    "arguments" : [
+      "--suite",
+      "blur",
+      "--json",
+      "Benchmarks\/results\/blur-1-tiled-v1.json"
+    ],
+    "cpu" : "Apple M5",
+    "date" : "2026-10-07T01:45:19Z",
+    "gpu" : "Apple M5",
+    "hardwareModel" : "Mac17,2",
+    "lowPowerMode" : false,
+    "os" : "Version 27.0.1 (Build 26A434)",
+    "physicalMemoryGiB" : 16,
+    "swiftBuild" : "release",
+    "thermalState" : "nominal",
+    "unifiedMemory" : true
+  },
+  "results" : [
+    {
+      "cacheMissesFirstRender" : 2,
+      "encode" : {
+        "mean" : 2.5791733333333336e-05,
+        "median" : 2.66665e-05,
+        "min" : 9.709000000000001e-06,
+        "p95" : 3.3333e-05,
+        "stddev" : 5.964963609463366e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.0010257527771803628,
+        "median" : 0.0009458749991608784,
+        "min" : 0.0007681249990127981,
+        "p95" : 0.0013354166658245958,
+        "stddev" : 0.00015527365017668424
+      },
+      "height" : 1080,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=1 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 16.1875,
+      "resolution" : "1080p",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.0013254181333333332,
+        "median" : 0.001294521,
+        "min" : 0.0011162090000000002,
+        "p95" : 0.001624875,
+        "stddev" : 0.00015139390159794712
+      },
+      "width" : 1920
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 2.39293e-05,
+        "median" : 2.57295e-05,
+        "min" : 1.0334000000000001e-05,
+        "p95" : 2.9125000000000003e-05,
+        "stddev" : 5.4937409910430485e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.0011617263890608834,
+        "median" : 0.0011417083333071787,
+        "min" : 0.0009116250002989545,
+        "p95" : 0.0014880833332426846,
+        "stddev" : 0.0001364742680037053
+      },
+      "height" : 1080,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=2 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 16.1875,
+      "resolution" : "1080p",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.0014704902666666665,
+        "median" : 0.001443625,
+        "min" : 0.001259541,
+        "p95" : 0.001783875,
+        "stddev" : 0.00013525595647313366
+      },
+      "width" : 1920
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 2.5323500000000002e-05,
+        "median" : 2.5479000000000005e-05,
+        "min" : 2.2916000000000002e-05,
+        "p95" : 2.6292000000000002e-05,
+        "stddev" : 1.2974555804856418e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.001275977777792529,
+        "median" : 0.001266541668883292,
+        "min" : 0.001001249998807907,
+        "p95" : 0.0015746249991934747,
+        "stddev" : 0.0001754698333657886
+      },
+      "height" : 1080,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=4 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 16.1875,
+      "resolution" : "1080p",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.001548872266666667,
+        "median" : 0.0015487705,
+        "min" : 0.0012232920000000002,
+        "p95" : 0.0018794170000000002,
+        "stddev" : 0.00018619724565612913
+      },
+      "width" : 1920
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 2.7241833333333334e-05,
+        "median" : 2.5771e-05,
+        "min" : 7.625000000000001e-06,
+        "p95" : 3.5458000000000005e-05,
+        "stddev" : 5.512791114510165e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.0014968902779704271,
+        "median" : 0.0014212291662261123,
+        "min" : 0.0014205416664481163,
+        "p95" : 0.0016787499989732169,
+        "stddev" : 0.00012328671866450308
+      },
+      "height" : 1080,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=8 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 16.1875,
+      "resolution" : "1080p",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.0016962320000000002,
+        "median" : 0.0016318960000000003,
+        "min" : 0.0015945000000000002,
+        "p95" : 0.0018967920000000002,
+        "stddev" : 0.00012691068307829723
+      },
+      "width" : 1920
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 2.4716566666666666e-05,
+        "median" : 2.5604e-05,
+        "min" : 7.542000000000001e-06,
+        "p95" : 3.1875e-05,
+        "stddev" : 5.625716983539867e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.0027403513882745755,
+        "median" : 0.0027403749991208315,
+        "min" : 0.0027396249970479403,
+        "p95" : 0.002741000000241911,
+        "stddev" : 3.787900927552453e-07
+      },
+      "height" : 1080,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=16 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 16.1875,
+      "resolution" : "1080p",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.0029470125000000003,
+        "median" : 0.002949792,
+        "min" : 0.0029131250000000003,
+        "p95" : 0.0029784580000000002,
+        "stddev" : 1.690378085863237e-05
+      },
+      "width" : 1920
+    },
+    {
+      "cacheMissesFirstRender" : 2,
+      "encode" : {
+        "mean" : 2.88986e-05,
+        "median" : 3.0250000000000003e-05,
+        "min" : 1.5792e-05,
+        "p95" : 3.575e-05,
+        "stddev" : 5.393320551694783e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.006763566666510693,
+        "median" : 0.006601749999390449,
+        "min" : 0.006549499998072861,
+        "p95" : 0.0074062499988940544,
+        "stddev" : 0.00029648430270253943
+      },
+      "height" : 1080,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=32 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 16.1875,
+      "resolution" : "1080p",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.006972623566666667,
+        "median" : 0.0068081875,
+        "min" : 0.006736167,
+        "p95" : 0.007627500000000001,
+        "stddev" : 0.00030323011686744696
+      },
+      "width" : 1920
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 3.193886666666667e-05,
+        "median" : 3.0375000000000003e-05,
+        "min" : 1.9792000000000003e-05,
+        "p95" : 5.6333000000000004e-05,
+        "stddev" : 9.020744040758994e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.013730348611716181,
+        "median" : 0.013580729166278616,
+        "min" : 0.012989500002731802,
+        "p95" : 0.015567333332000999,
+        "stddev" : 0.0006977782483133817
+      },
+      "height" : 1080,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=64 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 16.1875,
+      "resolution" : "1080p",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.0139792305,
+        "median" : 0.013821062500000002,
+        "min" : 0.013259875,
+        "p95" : 0.015794417,
+        "stddev" : 0.0007020571826448209
+      },
+      "width" : 1920
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 1.9320800000000003e-05,
+        "median" : 1.4479500000000001e-05,
+        "min" : 1.0167000000000001e-05,
+        "p95" : 6.0750000000000006e-05,
+        "stddev" : 1.5053370024460748e-05
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.001540699999895878,
+        "median" : 0.0011769166667363606,
+        "min" : 0.0011594583338592201,
+        "p95" : 0.002791458333376795,
+        "stddev" : 0.0006187600772115123
+      },
+      "height" : 2160,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=1 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 64.75,
+      "resolution" : "4k",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.001727790266666667,
+        "median" : 0.001371354,
+        "min" : 0.001302833,
+        "p95" : 0.002951083,
+        "stddev" : 0.0006186517369498468
+      },
+      "width" : 3840
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 2.160973333333334e-05,
+        "median" : 1.71875e-05,
+        "min" : 8.875e-06,
+        "p95" : 4.6083000000000006e-05,
+        "stddev" : 1.633590195231214e-05
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.0019903208331622105,
+        "median" : 0.0017879375009215437,
+        "min" : 0.0017765000011422671,
+        "p95" : 0.0034383749989501666,
+        "stddev" : 0.00045566173557764404
+      },
+      "height" : 2160,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=2 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 64.75,
+      "resolution" : "4k",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.0021854653333333333,
+        "median" : 0.001991688,
+        "min" : 0.001930833,
+        "p95" : 0.00360025,
+        "stddev" : 0.00044963519595900064
+      },
+      "width" : 3840
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 1.54056e-05,
+        "median" : 1.3104000000000002e-05,
+        "min" : 1.0125e-05,
+        "p95" : 2.6917000000000003e-05,
+        "stddev" : 6.737574012456809e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.0030909569445308686,
+        "median" : 0.0030701666673849104,
+        "min" : 0.0030660000011266675,
+        "p95" : 0.0031391666670970153,
+        "stddev" : 2.88528042367928e-05
+      },
+      "height" : 2160,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=4 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 64.75,
+      "resolution" : "4k",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.0032760556666666667,
+        "median" : 0.00327025,
+        "min" : 0.003222584,
+        "p95" : 0.0033541670000000003,
+        "stddev" : 3.844943604123328e-05
+      },
+      "width" : 3840
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 2.3451400000000004e-05,
+        "median" : 2.14995e-05,
+        "min" : 1.2584e-05,
+        "p95" : 3.6667e-05,
+        "stddev" : 8.562823594274653e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.0057139430556465715,
+        "median" : 0.005712250002034125,
+        "min" : 0.005666999997629318,
+        "p95" : 0.005858999997144565,
+        "stddev" : 6.174540438870058e-05
+      },
+      "height" : 2160,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=8 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 64.75,
+      "resolution" : "4k",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.005916587533333334,
+        "median" : 0.005894104000000001,
+        "min" : 0.0058416250000000005,
+        "p95" : 0.006068041000000001,
+        "stddev" : 6.898596349873562e-05
+      },
+      "width" : 3840
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 2.2412533333333333e-05,
+        "median" : 2.0478999999999998e-05,
+        "min" : 1.0208000000000001e-05,
+        "p95" : 3.3917e-05,
+        "stddev" : 8.26159354980758e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.011010163888689325,
+        "median" : 0.010958812499666237,
+        "min" : 0.010951083331747213,
+        "p95" : 0.011432374998548767,
+        "stddev" : 0.00014183707762572745
+      },
+      "height" : 2160,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=16 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 64.75,
+      "resolution" : "4k",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.011228022266666669,
+        "median" : 0.0112005005,
+        "min" : 0.01110875,
+        "p95" : 0.011615875000000001,
+        "stddev" : 0.00013272182423900342
+      },
+      "width" : 3840
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 4.996933333333333e-05,
+        "median" : 3.3438e-05,
+        "min" : 1.6542000000000002e-05,
+        "p95" : 0.00019195800000000002,
+        "stddev" : 4.9845747612899635e-05
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.02703770972232936,
+        "median" : 0.026548499999989872,
+        "min" : 0.025812791667704005,
+        "p95" : 0.030565375000151107,
+        "stddev" : 0.0011431890395495598
+      },
+      "height" : 2160,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=32 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 64.75,
+      "resolution" : "4k",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.027806445800000003,
+        "median" : 0.026805396000000002,
+        "min" : 0.026355292000000002,
+        "p95" : 0.031667166000000004,
+        "stddev" : 0.002286345122643188
+      },
+      "width" : 3840
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 2.8947333333333333e-05,
+        "median" : 2.90205e-05,
+        "min" : 1.1917000000000001e-05,
+        "p95" : 5.7375000000000005e-05,
+        "stddev" : 1.1406352254579705e-05
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.052545386111038775,
+        "median" : 0.05213527083287772,
+        "min" : 0.051657291667652316,
+        "p95" : 0.055334374999802094,
+        "stddev" : 0.001252050983429241
+      },
+      "height" : 2160,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=64 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 64.75,
+      "resolution" : "4k",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.05280882776666667,
+        "median" : 0.052381396000000004,
+        "min" : 0.051874333,
+        "p95" : 0.055641792,
+        "stddev" : 0.0012452335484208217
+      },
+      "width" : 3840
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 2.6237566666666664e-05,
+        "median" : 3.09375e-05,
+        "min" : 9.291000000000001e-06,
+        "p95" : 3.5125e-05,
+        "stddev" : 9.381034241785687e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.003468338888706057,
+        "median" : 0.0033382500005245674,
+        "min" : 0.0033293333362962585,
+        "p95" : 0.00365708333265502,
+        "stddev" : 0.00015170261729508975
+      },
+      "height" : 4000,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=1 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 187.0625,
+      "resolution" : "large",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.0036672735666666663,
+        "median" : 0.0035504580000000003,
+        "min" : 0.0034957910000000003,
+        "p95" : 0.0038737500000000005,
+        "stddev" : 0.00016002994660993576
+      },
+      "width" : 6000
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 2.9129066666666665e-05,
+        "median" : 3.0333500000000004e-05,
+        "min" : 1.0208000000000001e-05,
+        "p95" : 3.6458e-05,
+        "stddev" : 6.688974539909354e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.005213462499765834,
+        "median" : 0.005103875000713742,
+        "min" : 0.005098791665659519,
+        "p95" : 0.005646624998917105,
+        "stddev" : 0.00023170992084268043
+      },
+      "height" : 4000,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=2 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 187.0625,
+      "resolution" : "large",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.0054276569333333346,
+        "median" : 0.005332604500000001,
+        "min" : 0.0052840000000000005,
+        "p95" : 0.005888166,
+        "stddev" : 0.00022807534083411023
+      },
+      "width" : 6000
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 2.7429200000000005e-05,
+        "median" : 2.66665e-05,
+        "min" : 2.4708e-05,
+        "p95" : 3.3791e-05,
+        "stddev" : 2.331794336271247e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.008907833333311525,
+        "median" : 0.00883475000046019,
+        "min" : 0.008833249998133397,
+        "p95" : 0.009390750001330161,
+        "stddev" : 0.00023715163305578445
+      },
+      "height" : 4000,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=4 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 187.0625,
+      "resolution" : "large",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.00911950276666667,
+        "median" : 0.009050708000000001,
+        "min" : 0.009018,
+        "p95" : 0.009602792,
+        "stddev" : 0.00023338843179396352
+      },
+      "width" : 6000
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 5.0961033333333336e-05,
+        "median" : 2.7375e-05,
+        "min" : 2.0041e-05,
+        "p95" : 5.4333e-05,
+        "stddev" : 0.00012219752064273736
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.018304116667059132,
+        "median" : 0.017666770832875045,
+        "min" : 0.016386458333727205,
+        "p95" : 0.02216904166562017,
+        "stddev" : 0.0016940671763862989
+      },
+      "height" : 4000,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=8 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 187.0625,
+      "resolution" : "large",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.018570766566666667,
+        "median" : 0.018065333500000003,
+        "min" : 0.016587458000000003,
+        "p95" : 0.022396084,
+        "stddev" : 0.001683496536565068
+      },
+      "width" : 6000
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 2.7334733333333334e-05,
+        "median" : 2.8312500000000004e-05,
+        "min" : 1.0167000000000001e-05,
+        "p95" : 3.3e-05,
+        "stddev" : 6.1843852452949786e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.032315481944291,
+        "median" : 0.0318356458319613,
+        "min" : 0.03169262500159675,
+        "p95" : 0.034770874997775536,
+        "stddev" : 0.0010970624009925141
+      },
+      "height" : 4000,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=16 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 187.0625,
+      "resolution" : "large",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.03255052373333334,
+        "median" : 0.032061687500000005,
+        "min" : 0.031855125000000005,
+        "p95" : 0.035004125000000004,
+        "stddev" : 0.0010899430466713982
+      },
+      "width" : 6000
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 2.7112500000000005e-05,
+        "median" : 2.6167000000000002e-05,
+        "min" : 1.925e-05,
+        "p95" : 3.4708e-05,
+        "stddev" : 4.765411634895773e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.08210660555535772,
+        "median" : 0.07717960416630376,
+        "min" : 0.07597620833257679,
+        "p95" : 0.1007662916672416,
+        "stddev" : 0.00847332231914308
+      },
+      "height" : 4000,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=32 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 187.0625,
+      "resolution" : "large",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.08240361400000001,
+        "median" : 0.07746549999999999,
+        "min" : 0.076242667,
+        "p95" : 0.10126166700000001,
+        "stddev" : 0.00849600870825201
+      },
+      "width" : 6000
+    },
+    {
+      "cacheMissesFirstRender" : 0,
+      "encode" : {
+        "mean" : 2.67903e-05,
+        "median" : 2.6875000000000003e-05,
+        "min" : 1.7708e-05,
+        "p95" : 3.275e-05,
+        "stddev" : 4.109953658700627e-06
+      },
+      "export" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "gpu" : {
+        "mean" : 0.15787838749965885,
+        "median" : 0.15305274999991525,
+        "min" : 0.15193537499726517,
+        "p95" : 0.18270100000154343,
+        "stddev" : 0.01006619667838089
+      },
+      "height" : 4000,
+      "importTime" : {
+        "mean" : 0,
+        "median" : 0,
+        "min" : 0,
+        "p95" : 0,
+        "stddev" : 0
+      },
+      "iterations" : 30,
+      "name" : "GaussianBlur σ=64 [texture]",
+      "passes" : 2,
+      "peakTextureMiB" : 187.0625,
+      "resolution" : "large",
+      "suite" : "blur",
+      "textureAllocationsPerRender" : 0,
+      "total" : {
+        "mean" : 0.15815679583333336,
+        "median" : 0.153316375,
+        "min" : 0.152206,
+        "p95" : 0.18296883300000003,
+        "stddev" : 0.010064694725580078
+      },
+      "width" : 6000
+    }
+  ],
+  "settings" : {
+    "iterations" : 30,
+    "warmup" : 5
+  }
+}

@@ -1,0 +1,11 @@
+# .gitignore — Prism
+# Author: Torin Etheridge
+# Date: October 6, 2026
+
+.DS_Store
+.build/
+.swiftpm/
+DerivedData/
+*.xcresult
+*.trace
+Examples/PrismStudio/Screenshots/*.tmp.png

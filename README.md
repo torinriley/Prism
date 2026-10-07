@@ -25,7 +25,7 @@ let output = try await pipeline.render(inputCGImage)
 
 ## Requirements and installation
 
-- Swift 6 / Xcode 16 or newer
+- Swift 6 language mode. Built and tested only with Xcode 27 / Swift 6.4; older toolchains have not been tried
 - macOS 14+, iOS 17+. The `Prism` library compiles for iOS devices and the iOS Simulator; the tests, benchmarks and all measurements have been run on macOS only (Apple M5). Prism Studio is macOS-only.
 - A Metal-capable device
 - Apple's Metal Toolchain component (`xcodebuild -downloadComponent MetalToolchain`) if the local Xcode installation does not include the `metal` compiler

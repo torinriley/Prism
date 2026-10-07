@@ -1,0 +1,75 @@
+# ci.yml — Prism
+#
+# The GPU tests are written with `.enabled(if: hasMetal)`, so on a machine without a Metal device they
+# are *skipped* and `swift test` still exits 0. The "Require a Metal device" step makes that a failure
+# instead. If GitHub-hosted runners turn out to have no Metal device, point `test` at a self-hosted Mac
+# (`runs-on: [self-hosted, macOS, gpu]`) and do not let it run pull requests from forks.
+#
+# Toolchain: the package has only been built with Xcode 27 / Swift 6.4. Pin the Xcode you want tested
+# (for example with maxim-lobanov/setup-xcode) rather than relying on whatever `macos-latest` carries.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ios-compile:
+    name: Library compiles for iOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Metal toolchain
+        run: xcodebuild -downloadComponent MetalToolchain || true
+      - name: iOS device
+        run: xcodebuild -scheme Prism -destination 'generic/platform=iOS' build
+      - name: iOS Simulator
+        run: xcodebuild -scheme Prism -destination 'generic/platform=iOS Simulator' build
+
+  test:
+    name: Tests (${{ matrix.sanitizer }})
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        sanitizer: [none, thread, address]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Metal toolchain
+        run: xcodebuild -downloadComponent MetalToolchain || true
+      - name: Require a Metal device
+        run: |
+          cat > /tmp/metal-check.swift <<'EOF'
+          import Metal
+          guard let device = MTLCreateSystemDefaultDevice() else {
+              print("No Metal device: the GPU tests would be skipped, not run.")
+              exit(1)
+          }
+          print("Metal device: \(device.name)")
+          EOF
+          swiftc /tmp/metal-check.swift -o /tmp/metal-check && /tmp/metal-check
+      - name: Test
+        run: |
+          if [ "${{ matrix.sanitizer }}" = "none" ]; then
+            swift test
+          else
+            swift test --sanitize=${{ matrix.sanitizer }}
+          fi
+
+  release-build:
+    name: Release build
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Metal toolchain
+        run: xcodebuild -downloadComponent MetalToolchain || true
+      - name: Build (library, benchmarks, Studio)
+        run: swift build -c release
+      - name: Benchmark harness smoke test (not a measurement)
+        run: swift run -c release prism-bench --quick --suite ops --resolutions 1080p

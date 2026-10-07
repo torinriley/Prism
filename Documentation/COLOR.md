@@ -55,6 +55,11 @@ What it does *not* do:
   it yourself for 8-bit output (draw it into an 8-bit `CGContext`). CoreGraphics' float → 8-bit
   conversion of *partly transparent* pixels can land 1 LSB from the value Prism holds; opaque pixels
   round-trip exactly (tested).
+- Handing a `.high` result (a 16-bit *float* image) straight to ImageIO's PNG writer produces an 8-bit
+  file, and in a test partly transparent pixels deviated by up to 11 LSB from the same pipeline rendered at
+  8-bit (opaque pixels: within 1 LSB); the cause is not identified. Redrawing the result into a 16-bit
+  *integer* premultiplied sRGB `CGContext` first (what Prism Studio's `ImageExport` does) writes a true
+  16-bit PNG within 1 LSB of the 8-bit render, transparency included.
 - 32-bit float storage is not supported (`rgba32Float` textures are rejected).
 
 ## Import and export

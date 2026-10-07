@@ -165,6 +165,8 @@ private struct InspectorView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("GPU INSPECTOR")
                 .font(.system(size: 10, weight: .semibold, design: .rounded)).tracking(1.4)
+            Text("Per-pass timing mode: each pass is encoded separately, so totals differ slightly from the default encoding.")
+                .font(.system(size: 9)).foregroundStyle(.secondary)
             if let metrics {
                 metricRow("FRAME", milliseconds(metrics.totalDuration))
                 metricRow("GPU", milliseconds(metrics.gpuDuration))

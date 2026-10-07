@@ -451,10 +451,12 @@ public final class Renderer: Sendable {
             blit.optimizeContentsForCPUAccess(texture: output)
             blit.endEncoding()
         }
+        #if os(macOS)
         if output.storageMode == .managed, let blit = commandBuffer.makeBlitCommandEncoder() {
             blit.synchronize(resource: output)   // make GPU writes visible to the CPU (discrete GPUs)
             blit.endEncoding()
         }
+        #endif
         return Encoded(
             commandBuffer: commandBuffer, output: output, cacheHits: cacheHits, cacheMisses: cacheMisses,
             computeNodes: computeNodes, timer: timer)

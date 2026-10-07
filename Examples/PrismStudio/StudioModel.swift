@@ -37,7 +37,7 @@ final class StudioModel: ObservableObject {
         } catch {
             errorMessage = error.localizedDescription
         }
-        if let path = CommandLine.arguments.dropFirst().first {
+        if let path = ImageExport.imagePath(in: CommandLine.arguments) {
             load(URL(fileURLWithPath: path))
         }
     }
@@ -152,11 +152,8 @@ final class StudioModel: ObservableObject {
         let panel = NSSavePanel()
         panel.allowedContentTypes = [.png]
         panel.nameFieldStringValue = URL(fileURLWithPath: sourceName).deletingPathExtension().lastPathComponent + "-prism.png"
-        guard panel.runModal() == .OK, let url = panel.url,
-              let destination = CGImageDestinationCreateWithURL(url as CFURL, UTType.png.identifier as CFString, 1, nil)
-        else { return }
-        CGImageDestinationAddImage(destination, image, nil)
-        if !CGImageDestinationFinalize(destination) {
+        guard panel.runModal() == .OK, let url = panel.url else { return }
+        if !ImageExport.writePNG(image, to: url) {
             errorMessage = "Could not export the image."
         }
     }

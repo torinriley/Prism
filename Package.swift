@@ -25,6 +25,7 @@ let package = Package(
             exclude: ["README.md"]
         ),
         .testTarget(name: "PrismTests", dependencies: ["Prism"]),
+        .testTarget(name: "PrismStudioTests", dependencies: ["PrismStudio", "Prism"]),
     ],
     swiftLanguageModes: [.v6]
 )

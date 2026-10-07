@@ -7,7 +7,9 @@
 
 Prism is a Swift and Metal image-processing engine for Apple platforms. A compact value-oriented API hides an explicit render graph, deterministic scheduling, graph optimization, resource lifetime analysis, pooled textures, pipeline and LUT caches, asynchronous GPU execution, and instrumentation. Core Image is not used to implement effects.
 
-![Prism Studio running a real-time GPU pipeline with its live inspector](Documentation/Images/prism-studio.png)
+![Prism Studio running a GPU pipeline with its live inspector](Documentation/Images/prism-studio.png)
+
+*The screenshot is the first frame after loading an image, so the inspector shows cold-start cost (pipelines compiling, no texture reuse yet). Subsequent frames are much cheaper; see the measurements below.*
 
 ```swift
 import Prism
@@ -24,7 +26,7 @@ let output = try await pipeline.render(inputCGImage)
 ## Requirements and installation
 
 - Swift 6 / Xcode 16 or newer
-- macOS 14+, iOS 17+
+- macOS 14+, iOS 17+. The `Prism` library compiles for iOS devices and the iOS Simulator; the tests, benchmarks and all measurements have been run on macOS only (Apple M5). Prism Studio is macOS-only.
 - A Metal-capable device
 - Apple's Metal Toolchain component (`xcodebuild -downloadComponent MetalToolchain`) if the local Xcode installation does not include the `metal` compiler
 
@@ -126,7 +128,7 @@ Selected measured medians on one Apple M5, macOS 27.0.1, release build:
 |---|---:|---:|
 | Exposure, original CGImage path | 4K | 16.8 ms end to end |
 | Exposure, optimized CGImage path | 4K | 4.6 ms end to end |
-| 5-stage pipeline, texture path | 4K | 2.8–3.1 ms, depending on precision run |
+| 5-stage pipeline, texture path, 8-bit | 4K | 2.8–3.1 ms total (two runs); 3.5 ms in float16 |
 | Gaussian blur σ=8, before tiled/register-blocked kernel | 4K | 7.70 ms GPU |
 | Gaussian blur σ=8, optimized | 4K | 3.30 ms GPU |
 | LUT encode before cache | — | 0.42–0.47 ms |
@@ -147,6 +149,8 @@ swift run PrismStudio
 ```
 
 It supports drag-and-drop/Open, debounced real-time controls, press/hover before-and-after, 8-bit or half-float rendering, PNG export, and a live GPU inspector showing the executed graph, per-pass timings, texture reuse and pipeline-cache activity.
+
+Two things to know when reading its numbers and output: Studio renders at `.detailed` instrumentation, which encodes each pass separately so it can be timed, so its GPU totals are not those of the default encoding; and with the half-float toggle on, PNG export writes a 16-bit file (see [Studio notes](Examples/PrismStudio/README.md#notes-and-known-issues)).
 
 The app is a profiling surface, not a photo-editor product. Its implementation is documented in [Examples/PrismStudio](Examples/PrismStudio/README.md).
 

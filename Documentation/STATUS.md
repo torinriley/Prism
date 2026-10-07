@@ -56,6 +56,19 @@ See `Benchmarks/results/after-5-precision.md` for the precision cost. At 4K, the
 - Callers own cross-queue synchronization for texture input.
 - No in-flight render limit is imposed, so peak memory follows concurrency.
 - Performance has been measured on one Apple GPU generation.
+- ImageIO's PNG writer handles a half-float `CGImage` badly (8-bit output; up to 11 LSB error on partly
+  transparent pixels; cause not identified). Prism Studio avoids it by converting to 16-bit integer first
+  (tested); anyone exporting a `.high` result themselves should do the same. See [COLOR.md](COLOR.md).
+- At 24 MP the float16 texture path's wall time exceeds its GPU time by about 5 ms (e.g. 13.65 vs
+  8.57 ms for the 5-stage pipeline); reproducible, cause not understood. See [OPTIMIZATION.md](OPTIMIZATION.md).
+- The README screenshot is a cold first frame (pipelines compiling, no texture reuse); it should be retaken
+  after moving a slider. Prism Studio runs at `.detailed` instrumentation, which its inspector now states.
+- **iOS:** the `Prism` library compiles for iOS devices and the iOS Simulator (verified with
+  `xcodebuild -scheme Prism -destination 'generic/platform=iOS'` and `…'iOS Simulator'`). It has never been
+  *run* on iOS: tests, benchmarks and measurements are macOS-only. Building the whole package for iOS
+  fails because Prism Studio imports AppKit; the library product is unaffected. (An earlier revision did
+  not compile for iOS at all: it used `MTLStorageMode.managed`, which iOS lacks. That path is now
+  macOS-only.)
 - SwiftPM/Xcode 27 may print `missing creator for mutated node` for the generated resource bundle; this is a SwiftPM build-system warning rather than a Prism source warning.
 
 ## Optional future work

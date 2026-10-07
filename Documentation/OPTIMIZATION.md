@@ -415,3 +415,42 @@ Encode time is now in line with every other operation (0.01–0.05 ms), a 10–7
 10-stage texture pipeline's encode time falls from 0.44–0.47 ms to 0.043–0.046 ms. At 4K, a LUT pass on
 the texture path takes 1.52 ms total (was 1.98 ms); a Contrast pass takes 0.51 ms, so the remaining
 cost of a LUT pass is its GPU time (8 texture reads and trilinear interpolation per pixel), not CPU.
+
+### 6. Half-float storage (`Precision.high`): what it costs
+
+`Precision.high` is a feature, not an optimization; its cost is recorded here so the trade-off is
+measured. Results: `Benchmarks/results/after-5-precision.{md,json}` (machine 83% idle before and
+after; a first attempt was discarded because an unrelated process started during it). Medians.
+
+**Texture path** (pure GPU; GPU ms, 8-bit → float16, with peak texture memory in MiB):
+
+| pipeline | 1080p | 4K | 24 MP |
+|---|---|---|---|
+| 10 per-pixel (fused to 1 pass) | 0.51 → 0.38 | 1.55 → 1.55 | 4.52 → 4.36 |
+| GaussianBlur σ=8 | 0.83 → 0.83 | 3.45 → 3.45 | 9.54 → 9.56 |
+| 5-stage | 0.64 → 0.72 | 2.91 → 3.29 | 7.50 → 8.57 |
+| 10-stage | 1.36 → 1.80 | 5.90 → 7.51 | 21.26 → 28.17 |
+| memory, 5-stage (MiB) | 16 → 32 | 65 → 128 | 187 → 369 |
+
+A fused per-pixel chain and a lone blur cost the same in either format (arithmetic-bound). Multi-pass
+pipelines pay the extra memory traffic: at 4K, +13% for 5 stages and +27% for 10 stages. Memory is
+about 2× throughout.
+
+**`CGImage` path** (5-stage, total ms, 8-bit → float16):
+
+| | 1080p | 4K | 24 MP |
+|---|---|---|---|
+| total | 2.13 → 4.26 | 7.25 → 14.19 | 31.94 → 81.15 |
+| import | 0.48 → 1.99 | 1.91 → 7.63 | 7.22 → 39.23 |
+| export | 0.38 → 0.66 | 1.66 → 2.51 | 7.28 → 13.32 |
+
+The 64-bit-per-pixel import (a CoreGraphics redraw into a half-float bitmap for any image that is not
+already in that layout) is the largest cost. A client that already holds half-float data should use the
+texture path.
+
+**Unexplained.** At 24 MP the float16 texture-path rows have wall time well above GPU time, while the
+GPU time itself matches 8-bit: 5-stage 13.65 ms wall vs 8.57 ms GPU; 10-stage 41.47 vs 28.17;
+GaussianBlur σ=8 14.85 vs 9.56 (GPU 9.54 in 8-bit, 9.74 ms wall). The 8-bit rows do not show the gap,
+and it reproduced on a second quiet run. Large (≈190–370 MiB) textures and memory pressure are a
+candidate; this has not been tested. Prefer 4K-and-below numbers for conclusions about float16.
+

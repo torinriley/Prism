@@ -45,8 +45,15 @@ final class MetalContext: Sendable {
     }
 
     /// Storage mode for textures the CPU uploads to or reads from.
+    ///
+    /// Unified-memory GPUs (all Apple silicon and every iOS device) use `.shared`. Discrete GPUs on Intel
+    /// Macs need `.managed`, a storage mode that does not exist on iOS.
     var cpuVisibleStorage: MTLStorageMode {
+        #if os(macOS)
         device.hasUnifiedMemory ? .shared : .managed
+        #else
+        .shared
+        #endif
     }
 
     func makeTexture(width: Int, height: Int, pixelFormat: MTLPixelFormat = .rgba8Unorm) throws -> any MTLTexture {

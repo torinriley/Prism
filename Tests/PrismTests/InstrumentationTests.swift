@@ -60,7 +60,18 @@ struct InstrumentationTests {
         #expect(outputs[0] == outputs[1] && outputs[1] == outputs[2])
     }
 
-    @Test("Detailed mode times every pass, consistently with the command buffer")
+    @Test("Detailed mode degrades gracefully when the GPU cannot timestamp passes")
+    func detailedWithoutTimestamps() async throws {
+        // `perPassTimestamps: false` takes the same code path as a GPU without timestamp counters.
+        let renderer = Renderer(context: try MetalContext(), instrumentation: .detailed, optimizations: noFusion, perPassTimestamps: false)
+        let m = try await pipeline.renderWithMetrics(image(64, 64), using: renderer).metrics
+        #expect(m.level == .detailed)
+        #expect(m.nodes.map(\.name) == ["Exposure", "Contrast", "Exposure"], "the graph is still reported")
+        #expect(m.nodes.allSatisfy { $0.gpuDuration == nil }, "but per-pass times are absent, not wrong")
+        #expect(m.gpuDuration != nil && m.cpuEncodeDuration != nil, "buffer-level timing is still available")
+    }
+
+    @Test("Detailed mode times every pass, consistently with the command buffer", .enabled(if: timestampsWork))
     func detailed() async throws {
         let renderer = try Renderer(instrumentation: .detailed)
         let big = image(2048, 1536)
@@ -68,7 +79,7 @@ struct InstrumentationTests {
         _ = try await p.renderWithMetrics(big, using: renderer)          // warm up
         let m = try await p.renderWithMetrics(big, using: renderer).metrics
         let times = m.nodes.map(\.gpuDuration)
-        try #require(times.allSatisfy { $0 != nil }, "this GPU should support timestamp counters")
+        try #require(times.allSatisfy { $0 != nil }, "timestampsWork said this GPU supports per-pass timestamps")
         #expect(m.nodes.map(\.name) == ["Exposure", "GaussianBlur horizontal", "GaussianBlur vertical", "Vignette"])
         let sum = times.compactMap { $0 }.reduce(0, +)
         #expect(times.allSatisfy { $0! > 0 })

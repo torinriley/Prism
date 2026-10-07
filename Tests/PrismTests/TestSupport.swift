@@ -299,3 +299,23 @@ func referenceBlurFloat(_ src: [UInt8], width: Int, height: Int, sigma: Float) -
     }
     return current
 }
+
+/// Whether this GPU really delivers per-pass timestamps: asks for them once and checks the result.
+/// (Some GPUs, such as the virtual one on GitHub's hosted runners, do not.)
+let timestampsWork: Bool = {
+    guard let context = try? MetalContext(), let timer = NodeTimer(device: context.device, passes: 1),
+          let pipeline = try? context.makePipeline(kernel: "prism_invert"),
+          let input = try? context.makeTexture(width: 8, height: 8), let output = try? context.makeTexture(width: 8, height: 8),
+          let buffer = context.queue.makeCommandBuffer()
+    else { return false }
+    let descriptor = MTLComputePassDescriptor()
+    timer.attach(to: descriptor, pass: 0)
+    guard let encoder = buffer.makeComputeCommandEncoder(descriptor: descriptor) else { return false }
+    encoder.setComputePipelineState(pipeline)
+    encoder.setTexture(input, index: 0); encoder.setTexture(output, index: 1)
+    encoder.dispatch(pipeline, width: 8, height: 8)
+    encoder.endEncoding()
+    buffer.commit(); buffer.waitUntilCompleted()
+    guard buffer.status == .completed, let ticks = timer.resolveTicks() else { return false }
+    return ticks.count == 2 && ticks[1] > ticks[0]
+}()

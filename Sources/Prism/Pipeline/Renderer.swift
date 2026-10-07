@@ -19,6 +19,9 @@ public final class Renderer: Sendable {
     let texturePool: TexturePool
     let lutCache: LUTTextureCache
     private let signposter: OSSignposter
+    /// Whether `.detailed` instrumentation may request per-pass GPU timestamps. `false` behaves exactly like a
+    /// GPU that cannot provide them (tests use it to exercise that path on hardware that can).
+    private let perPassTimestamps: Bool
     let optimizations: OptimizationOptions
 
     /// How much this renderer measures. See ``InstrumentationLevel``.
@@ -45,9 +48,11 @@ public final class Renderer: Sendable {
         context: MetalContext,
         instrumentation: InstrumentationLevel = .standard,
         optimizations: OptimizationOptions = .all,
-        texturePoolBudget: Int = 512 * 1024 * 1024
+        texturePoolBudget: Int = 512 * 1024 * 1024,
+        perPassTimestamps: Bool = true
     ) {
         self.context = context
+        self.perPassTimestamps = perPassTimestamps
         self.optimizations = optimizations
         self.instrumentation = instrumentation
         signposter = Signposts.signposter(for: instrumentation)
@@ -372,7 +377,7 @@ public final class Renderer: Sendable {
             throw PrismError.commandBufferFailed(reason: "could not create command buffer")
         }
         let computeNodes = plan.order.map { graph.node($0) }.filter { if case .compute = $0.work { true } else { false } }
-        let timer = instrumentation == .detailed ? NodeTimer(device: context.device, passes: computeNodes.count) : nil
+        let timer = instrumentation == .detailed && perPassTimestamps ? NodeTimer(device: context.device, passes: computeNodes.count) : nil
 
         var openEncoder: (any MTLComputeCommandEncoder)?
         func encoder(forPass pass: Int) throws -> any MTLComputeCommandEncoder {

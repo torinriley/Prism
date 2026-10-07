@@ -52,9 +52,16 @@ struct LUTCacheTests {
         let outB = try pixels(of: try await ImagePipeline { LUTGrade(b) }.render(image, using: renderer))
         #expect(outA != outB, "a cache keyed on size alone would return A's texture for B")
         #expect(renderer.statistics.lutTextureUploads == 2)
-        // And each still gives its own result when cached.
-        #expect(try pixels(of: try await ImagePipeline { LUTGrade(a) }.render(image, using: renderer)) == outA)
-        #expect(try pixels(of: try await ImagePipeline { LUTGrade(b) }.render(image, using: renderer)) == outB)
+        // And each still gives its own result when cached. On a mismatch, say how large it is and whether it
+        // persists (a wrong cached texture) or was a one-off (a nondeterministic render).
+        for (name, lut, expected) in [("A", a, outA), ("B", b, outB)] {
+            let again = try pixels(of: try await ImagePipeline { LUTGrade(lut) }.render(image, using: renderer))
+            if again != expected {
+                let third = try pixels(of: try await ImagePipeline { LUTGrade(lut) }.render(image, using: renderer))
+                let differing = zip(again, expected).filter { $0 != $1 }.count
+                Issue.record("LUT \(name) re-render differs: \(differing) of \(again.count) bytes, max \(maxError(again, expected)) LSB; a third render \(third == expected ? "matches the original" : third == again ? "matches the second (stable but different)" : "differs from both (nondeterministic)")")
+            }
+        }
         #expect(renderer.statistics.lutTextureUploads == 2)
     }
 
